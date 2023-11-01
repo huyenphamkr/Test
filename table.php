@@ -1,3 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" method="post">
+        <h2>hello</h2>
+        <div class="col-md-12"><br>
+            <h4 style="text-align: center">Chi tiết đơn đặt hàng</h4>
+            <table id="tableContent" class="table table-bordered table-hover dataTable dtr-inline"
+                aria-describedby="example2_info">
+            </table>
+        </div>
+    </form>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <!-- javacript ckeditor -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</body>
+
+</html>
+
+<script>
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+    }
+});
+var $i = 0;
+
+loadTable();
+
+function loadTable() {
+    alert("vao");
+    document.getElementById("tableContent").innerHTML += '<thead>' +
+        '<tr style="text-align: center">' +
+        '<th>#</th>' +
+        '<th>ID</th>' +
+        '<th>Tên sản phẩm</th>' +
+        '<th>Số lượng</th>' +
+        '<th>Giá</th>' +
+        '<th>Thành tiền</th>' +
+        '  <td style="text-align: center">' +
+        '    <button onclick="add();" type="button" class="btn btn-primary btn-sm" href="#">' +
+        '       <i class="fas fa-edit"></i>' +
+        '    </button>' +
+        '</tr>' +
+        '</thead>' +
+        '<tbody>';
+    // for ($i = 0; $i < 3; $i++) {
+    // SumPrice += detailOrder[$i].price * detailOrder[$i].amount;
+    // SumAmount += Number(detailOrder[$i].amount);
+    document.getElementById("tableContent").innerHTML += '<tr data-index='+ ($i + 1) +'>'+
+        '  <td style="text-align: center">' + ($i + 1) + '</td>' +
+        '  <td style="text-align: center">' + ($i + 1) + '</td>' +
+        '  <td>' + ($i + 1) + '</td>' +
+        '  <td style="text-align: center">' + ($i + 1) + '</td>' +
+        '  <td style="text-align: center">' + +'</td>' +
+        '  <td style="text-align: center">' + ($i + 1) + '</td>' +
+        '  <td style="text-align: center">' +
+        '    <button onclick="editItem(\'' + ($i + 1) +
+        '\');" type="button" class="btn btn-primary btn-sm" href="#">' +
+        '       <i class="fas fa-edit"></i>' +
+        '    </button>' +
+        '    <button onclick="removeRow(\'' + ($i + 1) +
+        '\')" type="button" class="btn btn-danger btn-sm" href="#">' +
+        '      <i class="fas fa-trash"></i>' +
+        '    </button>' +
+        '  </td>' +
+        '</tr>';
+
+        document.getElementById("tableContent").innerHTML += '</tbody>';
+    // $('#tableContent').html(_xhtml);
+
+}
+
+function add()
+{
+     $i++ ;
+    document.getElementById("tableContent").innerHTML += '<tr data-index='+ ($i + 1) +'>'+
+    '  <td style="text-align: center">' + ($i + 1) + '</td>' +
+    '<td><input type="text" name="fullname[]" class="form-control"></td>'+
+            '<td><select name="designation[]" class="form-control">'+
+                    '<option value="" selected>Select Designation</option>'+
+                  ' <option value="Engineer">Engineer</option>'+
+                    '<option value="Accountant">Accountant</option>'+
+                '</select></td>'+
+        '  <td>' + ($i + 1) + '</td>' +
+        '  <td style="text-align: center">' + +'</td>' +
+        '  <td style="text-align: center">' + ($i + 1) + '</td>' +
+        '  <td style="text-align: center">' +
+        '    <button onclick="editItem(\'' + ($i + 1) +
+        '\');" type="button" class="btn btn-primary btn-sm" href="#">' +
+        '       <i class="fas fa-edit"></i>' +
+        '    </button>' +
+        '    <button onclick="removeRow(\'' + ($i + 1) +
+        '\')" type="button" class="btn btn-danger btn-sm" href="#">' +
+        '      <i class="fas fa-trash"></i>' +
+        '    </button>' +
+        '  </td>' +
+        '</tr>';
+}
+function removeRow(i) {
+        $("tbody").find(`tr[data-index='${i}']`).remove();
+    }
+</script>
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <form action="" method="post">
 
