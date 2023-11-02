@@ -1,3 +1,4 @@
+//How to get all the values of input array element jquery
 <form action="#" method="post">
     <input type="text" name="fullname[]" id="fn1" class="form-control" value="11">
     <input type="text" name="fullname[]" id="fn2" class="form-control" value="aa">
