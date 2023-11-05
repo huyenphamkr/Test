@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<style>
+body {
+    margin: 0;
+}
+
+.table>tbody>tr:first-child>td:first-child {
+    /* border-top-style: none !important;
+    border-top-style: solid;
+    border-top: rgba(var(--bs-dark-rgb),var(--bs-border-opacity))!important; */
+    /* background-color: red; */
+}
+
+.table>:not(caption)>*>* {
+    padding: 0 0;
+}
+
+.table>tbody>tr:first-child>td:not(:first-child) {
+    border-top-style: hidden !important;
+    border: none;
+}
+
+.table-secondary {
+    border-color: rgba(var(--bs-dark-rgb), var(--bs-border-opacity)) !important;
+}
+
+.border-top-right-none {
+    border-right-style: hidden;
+    border-top-style: hidden;
+}
+
+.border-radius-none {
+    border-radius: 0px;
+}
+
+.bd-t-r {
+    border-top-color: rgba(var(--bs-dark-rgb), var(--bs-border-opacity)) !important;
+    border-right-color: rgba(var(--bs-dark-rgb), var(--bs-border-opacity)) !important;
+}
+</style>
+
+<body>
+    <div class="edit-content">
+        <div class="mb-2">
+            <button type="button" class="btn btn-blue">保存</button>
+            <button type="button" class="btn btn-outline-primary">キャンセル</a>
+        </div>
+
+        <div class="container">
+            <table class="table table-bordered border-dark">
+                <tbody>
+                    <tr>
+                        <td class="table-secondary border-dark">
+                            <div class="p-1 text-center">
+                                <label>1.aaaaaaaaaaaa</label>
+                            </div>
+                        </td>
+                        <td colspan="2">
+                            <select name="" id="" class="form-select border-radius-none bd-t-r">
+                                <option value="cbb">cbb</option>
+                                <option value="audi">Audi</option>
+                            </select>
+                        </td>
+                        <td colspan="10">
+                            <div class="d-sm-flex flex-wrap align-items-center justify-content-center">
+                                <div class="d-sm-flex align-items-center flex-wrap">
+                                    <div class="w-c-250">
+                                        <input id="txtDateS" name="txtDateS" type="date" autocomplete="off"
+                                            maxlength="10" min="" max="<?=date('Y-m-d', strtotime('+1 year'))?>"
+                                            value="" class="form-control border-radius-none" autofocus>
+                                    </div>
+                                    <label class="me-2 ps-sm-2">~</label>
+                                    <div class="w-c-250">
+                                        <input id="txtDateE" name="txtDateE" type="date" autocomplete="off"
+                                            maxlength="10" min="" max="<?=date('Y-m-d', strtotime('+1 year'))?>"
+                                            value="" class="form-control border-radius-none">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table-secondary border-dark">
+                            <div class="p-1 text-center">
+                                <label>1.aaaaaaaaaaaa</label>
+                            </div>
+                        </td>
+                        <td colspan="2" class="border-top-right-none">
+                            <select name="" id="" class="form-select border-radius-none bd-t-r">
+                                <option value="cbb">cbb</option>
+                                <option value="audi">Audi</option>
+                            </select>
+                        </td>
+                        <td colspan="10" class="border-top-right-none">
+                            <div class="d-sm-flex flex-wrap align-items-center justify-content-center">
+                                <div class="d-sm-flex align-items-center flex-wrap">
+                                    <div class="w-c-250">
+                                        <input id="txtDateS" name="txtDateS" type="date" autocomplete="off"
+                                            maxlength="10" min="" max="<?=date('Y-m-d', strtotime('+1 year'))?>"
+                                            value="" class="form-control border-radius-none" autofocus>
+                                    </div>
+                                    <label class="me-2 ps-sm-2">~</label>
+                                    <div class="w-c-250">
+                                        <input id="txtDateE" name="txtDateE" type="date" autocomplete="off"
+                                            maxlength="10" min="" max="<?=date('Y-m-d', strtotime('+1 year'))?>"
+                                            value="" class="form-control border-radius-none">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="table-secondary">
+                            <div class="p-1 text-center"><label>2.aaaaaaaaaaaa</label></div>
+                        </td>
+                        <td colspan="2">
+                            <select name="" id="" class="form-select border-radius-none">
+                                <option value="cbb">cbb</option>
+                                <option value="audi">Audi</option>
+                            </select>
+                        </td>
+                        <td colspan="10"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-secondary">
+                            <div class="bg-title p-1 text-center"><label>3.aaaaaaaaaaaa</label></div>
+                        </td>
+                        <td colspan="12">textbox</td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-secondary">
+                            <div class="bg-title p-1 text-center"><label>10.aaaaaaaaaaaa</label></div>
+                        </td>
+                        <td colspan="12">textbox</td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-secondary">
+                            <div class="bg-title p-1 text-center"><label>11.aaaaaaaaaaaa</label></div>
+                        </td>
+                        <td colspan="12">textbox</td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-secondary" rowspan="2">
+                            <div class="bg-title p-1 text-center"><label>12.aaaaaaaaaaaa</label></div>
+                        </td>
+                        <td colspan="12">
+                            textbox
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="12">textbox</td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-secondary">
+                            <div class="bg-title p-1 text-center"><label>13aaaaaaaaaaaa</label></div>
+                        </td>
+                        <td colspan="12">textbox</td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-secondary">
+                            <div class="bg-title p-1 text-center"><label>14aaaaaaaaaaaa</label></div>
+                        </td>
+                        <td colspan="12">textbox</td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-secondary">
+                            <div class="bg-title p-1 text-center"><label>15.aaaaaaaaaaaa</label></div>
+                        </td>
+                        <td colspan="12">textbox</td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-secondary">
+                            <div class="bg-title p-1 text-center"><label>16.aaaaaaaaaaaa</label></div>
+                        </td>
+                        <td colspan="2">
+                            <select name="" id="" class="form-select border-radius-none">
+                                <option value="cbb">cbb</option>
+                                <option value="audi">Audi</option>
+                            </select>
+                        </td>
+                        <td colspan="10">textbox</td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-secondary">
+                            <div class="bg-title p-1 text-center"><label>17.aaaaaaaaaaaa</label></div>
+                        </td>
+                        <td colspan="2">
+                            <select name="" id="" class="form-select border-radius-none">
+                                <option value="cbb">cbb</option>
+                                <option value="audi">Audi</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-secondary">
+                            <div class="bg-title p-1 text-center"><label>18.aaaaaaaaaaaa</label></div>
+                        </td>
+                        <td colspan="12">textbox</td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-secondary">
+                            <div class="bg-title p-1 text-center"><label>aaaaaaaaaaaa</label></div>
+                        </td>
+                        <td colspan="12">textbox</td>
+                    </tr>
+                    <tr>
+                        <td class="table-secondary" rowspan="22">
+                            <div class="bg-title p-1 text-center"><label>aaaaaaaaaaaa</label></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" rowspan="3">
+                            <div class="bg-title"><label>1</label></div>
+                        </td>
+                        <td colspan="2">
+                            <div class="bg-title p-1 text-center"><label>1,1</label></div>
+                        </td>
+                        <td colspan="6">
+                            <div><label>1.1.1</label></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <div class="bg-title p-1 text-center"><label>1.2</label></div>
+                        </td>
+                        <td colspan="6">1.2.2</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <div class="bg-title p-1 text-center"><label>1.3</label></div>
+                        </td>
+                        <td colspan="6">1.3.2</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" rowspan="5">
+                            <div class="bg-title p-1 text-center"><label>2</label></div>
+                        </td>
+                        <td colspan="2">
+                            <div class="bg-title p-1 text-center"><label>2,1</label></div>
+                        </td>
+                        <td colspan="6">
+                            <div><label>2.1.1</label></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="bg-title p-1 text-center"><label>2.2</label></div>
+                        </td>
+                        <td colspan="6">2.2.2</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="bg-title p-1 text-center"><label>2.3</label></div>
+                        </td>
+                        <td colspan="6">2.3.2</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="bg-title p-1 text-center"><label>2.4</label></div>
+                        </td>
+                        <td colspan="6">2.4.2</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="bg-title p-1 text-center"><label>2.5</label></div>
+                        </td>
+                        <td colspan="6">2.5.2</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" rowspan="6">
+                            <div class="bg-title p-1 text-center"><label>3</label></div>
+                        </td>
+                        <td rowspan="3" colspan="2">
+                            <div class="bg-title p-1 text-center"><label>3,1</label></div>
+                        </td>
+                        <td rowspan="2">
+                            <div><label>3.1.1</label></div>
+                        </td>
+                        <td colspan="2">
+                            <div><label>3.1.1.1</label></div>
+                        </td>
+                        <td colspan="3">
+                            <div><label>3.1.1.2</label></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div><label>3.1.1.2</label></div>
+                        </td>
+                        <td colspan="3">3.112.2</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <div><label>3.1.2</label></div>
+                        </td>
+                        <td colspan="3">3.1.2.1</td>
+
+                    </tr>
+                    <tr>
+                        <td rowspan="2" colspan="2">
+                            <div class="bg-title p-1 text-center"><label>2</label></div>
+                        </td>
+                        <td colspan="3">1</td>
+                        <td colspan="3">2</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">1</td>
+                        <td colspan="3">2</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div><label>3.5</label></div>
+                        </td>
+                        <td colspan="6">3.5.2</td>
+                    </tr>
+
+                    <tr>
+                        <td rowspan="3" colspan="2">4</td>
+                        <td colspan="2">1</td>
+                        <td colspan="6">2</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">2</td>
+                        <td colspan="6">1</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">2</td>
+                        <td colspan="6">
+                            <select name="" id="" class="form-select border-radius-none">
+                                <option value="cbb">cbb</option>
+                                <option value="audi">Audi</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3">55</td>
+                        <td colspan="1">
+                            <select name="" id="" class="form-select border-radius-none">
+                                <option value="cbb">cbb</option>
+                            </select>
+                        </td>
+                        <td colspan="6">2</td>
+                    </tr>
+
+
+                    <tr>
+                        <td rowspan="3" colspan="2">6</td>
+                        <td colspan="1">5.1</td>
+                        <td colspan="1">
+                            <select name="" id="" class="form-select border-radius-none">
+                                <option value="cbb">cbb</option>
+                        </td>
+                        <td colspan="6">5.3</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="1">5.1</td>
+                        <td colspan="1">
+                            <select name="" id="" class="form-select border-radius-none">
+                                <option value="cbb">cbb</option>
+                        </td>
+                        <td colspan="6">5.3</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="1">5.1</td>
+                        <td colspan="1">
+                            <select name="" id="" class="form-select border-radius-none">
+                                <option value="cbb">cbb</option>
+                        </td>
+                        <td colspan="6">5.3</td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-secondary" rowspan="5">
+                            <div class="bg-title p-1 text-center"><label>ggggg</label></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">1</td>
+                        <td colspan="1">
+                            <select name="" id="" class="form-select border-radius-none">
+                                <option value="cbb">cbb</option>
+                        </td>
+                        <td colspan="6">2</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">2</td>
+                        <td colspan="1">
+                            <select name="" id="" class="form-select border-radius-none">
+                                <option value="cbb">cbb</option>
+                        </td>
+                        <td colspan="6">2</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">3</td>
+                        <td colspan="7">2</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">4</td>
+                        <td colspan="7">1</td>
+                    </tr>
+                    <tr>
+                        <td class="table-secondary">end</td>
+                        <td colspan="10">@twittertwittertwittertwittertwittertwitter</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="col-3">
+                <table class="table2 table-bordered ">
+                    <tbody>
+                        <tr>
+                            <td class="table-secondary">
+                                <div class="bg-title p-1 text-center">
+                                    <label>1.aaaaaaaaaaaa</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>@twittertwittertwititter</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
