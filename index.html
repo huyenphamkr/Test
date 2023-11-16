@@ -1,19 +1,511 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
-    <style>
-        h1{
-            color: aqua;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
-    <h1>Phạm Thị Ngọc Huyền</h1>
-    <h2>Nguyễn Thị Xuân Hoài</h2>
-</body>
-</html>
+@extends('layouts.layout')
+
+@section('title', '雇用契約プリセット')
+
+@push('scripts')
+<!-- <script src="{{ asset('js/users/m01_contract.js?v=' . time()) }}"></script> -->
+@endpush
+
+@section('content')
+<style>
+    .legend-body {
+        padding-right: 0rem !important;
+        padding-bottom: 0rem !important;
+    }
+</style>
+
+<div class="edit-content">
+    <div class="mb-2">
+        <button type="button" class="btn btn-blue" tabindex="-1" onclick="">保存</button>
+        <button type="button" class="btn btn-outline-primary" tabindex="-1" onclick="BackPrev({{route('u03')}})">キャンセル</button>
+        <button type="button" class="btn btn-warning" tabindex="-1" onclick="">HD確認</button>
+        <button type="button" class="btn btn-success float-end" tabindex="-1" onclick="">入職者申請状況</button>
+    </div>
+
+    <div class="row mb-2 mb-xl-0 mb-md-4">
+        <div class="col-xl-6">
+            <div class="table-responsive">
+                <table class="table table-bordered table-border-color">
+                    <thead class="sticky-top top--1">
+                        <tr id="" class="tr-head bg-title text-center p-1">
+                            <th scope="col">フロー</th>
+                            <th scope="col">氏名</th>
+                            <th scope="col">更新日時</th>
+                            <th class="text-center w-c-50 bg-white border-0 border-bottom border-top border-white"></th>
+                            <th class="text-center w-c-50 bg-white border-0 border-bottom border-top border-white"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="">
+                        <tr>
+                            <td scope="row" class="bg-title text-center">作成者</td>
+                            <td scope="row"></td>
+                            <td scope="row"></td>
+                            <td scope="row" class="text-center w-c-50 border-0 border-bottom border-top border-white">
+                                <button type="button" class="btn btn-blue">送信</button>
+                            </td>
+                            <td scope="row" class="text-center w-c-50 border-0 border-bottom border-top border-white">
+                                <button type="button" class="btn btn-danger">削除</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td scope="row" class="bg-title text-center">申請者</td>
+                            <td scope="row"></td>
+                            <td scope="row"></td>
+                            <td scope="row" class="text-center w-c-50 border-0 border-bottom border-top border-white"></td>
+                            <td scope="row" class="text-center w-c-50 border-0 border-bottom border-top border-white"></td>
+                        </tr>
+
+                        <tr>
+                            <td scope="row" class="bg-title text-center">1次承認</td>
+                            <td scope="row"></td>
+                            <td scope="row"></td>
+                            <td scope="row" class="text-center w-c-50 border-0 border-bottom border-top border-white">
+                                <button type="button" class="btn btn-blue">承認</button>
+                            </td>
+                            <td scope="row" class="text-center w-c-50 border-0 border-bottom border-top border-white">
+                                <button type="button" class="btn btn-danger">否認</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="bg-title text-center">2次承認</td>
+                            <td scope="row"></td>
+                            <td scope="row"></td>
+                            <td scope="row" class="text-center w-c-50 border-0 border-bottom border-top border-white">
+                                <button type="button" class="btn btn-blue">承認</button>
+                            </td>
+                            <td scope="row" class="text-center w-c-50 border-0 border-bottom border-top border-white">
+                                <button type="button" class="btn btn-danger">否認</button>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td scope="row" class="bg-title text-center">HD承認</td>
+                            <td scope="row"></td>
+                            <td scope="row"></td>
+                            <td scope="row" class="text-center w-c-50 border-0 border-bottom border-top border-white">
+                                <button type="button" class="btn btn-blue">承認</button>
+                            </td>
+                            <td scope="row" class="text-center w-c-50 border-0 border-bottom border-top border-white">
+                                <button type="button" class="btn btn-danger">否認</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-xl-1"></div>
+
+        <div class="col-xl-4">
+            <div>
+                <div class="p-1 fs-25"><label>コメント</label></div>
+            </div>
+            <div class="">
+                <textarea name="txtNote" class="form-control border-radius-none align-top" maxlength="500" autofocus></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-xl-2 col-md-4">
+            <div class="bg-title text-center p-1"><span class="note">*</span><label>入社予定日</label></div>
+            <input type="date" name="txtDate_join" autocomplete="off" class="form-control border-radius-none" maxlength="10" value="" autofocus>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-2 col-md-4 mb-2">
+            <div class="bg-title text-center p-1"><span class="note">*</span><label>氏名</label></div>
+            <input name="txtName" type="text" autocomplete="off" class="form-control border-radius-none" maxlength="30" value="" autofocus>						
+        </div>
+        <div class="col-xl-2 col-md-4 mb-2">
+            <div class="bg-title text-center p-1"><span class="note">*</span><label>事業所名</label></div>
+            <input name="txtFurigana" type="text" autocomplete="off" class="form-control border-radius-none" maxlength="30" value="" autofocus>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="mt-2">
+            <div class="p-1 fs-25"><label>所属</label></div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-2">
+            <div class="bg-title text-center p-1"><span class="note">*</span><label>事業所</label></div>
+            <select name="cmbOffice_cd" class="form-select border-radius-none">
+                <option></option>
+                <option value="00000" selected data-value="00000">株式会社事務局 </option>
+            </select>
+        </div>					
+        <div class="col-xl-3 col-md-6 mb-2">
+            <div class="bg-title text-center p-1"><span class="note">*</span><label>所属</label></div>
+            <select name="cmbBelong_cd" class="form-select border-radius-none select-disable">
+                <option></option>
+                <option value="00000">株式会社事務局 </option>
+            </select>
+        </div>
+        <div class="col-xl-2 col-md-4 mb-2">
+            <div class="bg-title text-center p-1"><label>役職</label></div>
+            <input type="text" name="txtPosition" autocomplete="off" class="form-control border-radius-none" maxlength="30" value="position" autofocus>
+        </div>
+        <div class="col-xl-2 col-md-4 mb-2">
+            <div class="bg-title text-center p-1"><span class="note">*</span><label>正社員・パート</label></div>
+            <select name="cmbWork_time_flag" class="form-select border-radius-none">
+                <option></option>
+                <option value="00000">Work_time_flag</option>
+            </select>
+        </div>
+        <div class="col-xl-2 col-md-4 mb-2">
+            <div class="bg-title text-center p-1"><span class="note">*</span><label>社員番号</label></div>
+            <input type="text" name="txtUsers_number" autocomplete="off" autofocus class="form-control border-radius-none pad-0" maxlength="7" value="0000010">
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-xl-8 mb-xl-0 mb-md-2">
+            <fieldset class="legend-box">
+                <legend class="legend-title">入社前手続き</legend>
+                <div class="legend-body">
+                    <div class="row ms-1">
+                        <div class="form-check col-4 col-md-3 col-xl-2 mb-2">
+                            <input class="form-check-input" type="checkbox" checked value="97" id="prod_2" name="prod[]">
+                            <label class="form-check-label" for="prod_2">ガソリンカード</label>
+                        </div>
+                        <div class="form-check col-4 col-md-3 col-xl-2 mb-2">
+                            <input class="form-check-input" type="checkbox" checked value="97" id="prod_2" name="prod[]">
+                            <label class="form-check-label" for="prod_2">ガソリンカード</label>
+                        </div>
+                        <div class="form-check col-4 col-md-3 col-xl-2 mb-2">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label" for="prod">aaaaaaa</label>
+                        </div>
+                        <div class="form-check col-4 col-md-3 col-xl-2 mb-2">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label" for="prod">aaaaaaa</label>
+                        </div>
+                        <div class="form-check col-4 col-md-3 col-xl-2 mb-2">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label" for="prod">aaaaaaa</label>
+                        </div>
+                        <div class="form-check col-4 col-md-3 col-xl-2 mb-2">
+                            <input class="form-check-input" type="checkbox" checked value="97" id="prod_2" name="prod[]">
+                            <label class="form-check-label" for="prod_2">ガソリンカード</label>
+                        </div>
+                        <div class="form-check col-4 col-md-3 col-xl-2 mb-2">
+                            <input class="form-check-input" type="checkbox" checked value="97" id="prod_2" name="prod[]">
+                            <label class="form-check-label" for="prod_2">ガソリンカード</label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-xl-2 col-md-4 mb-0 mt-auto">
+            <div class="bg-title text-center p-1"><label>会社携帯番号</label></div>
+            <input type="text" name="txtCompany_mobile_number" autocomplete="off" class="form-control border-radius-none pad-0" autofocus maxlength="20" 
+                value="888">
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-xl-3 col-md-4 mb-2">
+            <div class="bg-title text-center p-1"><span class="note">*</span><label>履歴書</label></div>
+            <input autocomplete="off" class="form-control border-radius-none" maxlength="" value="">
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-4 col-xl-3">
+            <fieldset class="legend-box border-0" style="height: 500px;">
+                <!-- <legend class="legend-title">◆会社ロゴ</legend> -->
+                <div class="legend-body">
+                
+                    <div class="d-flex">
+                        <a target="_blank" id="linkBanner" href="">
+                            <img id="imgBanner" name="imgBanner" class="img-fluid" style="height: 97%!important;" src="">
+                        </a>
+                        <input type="hidden" id="curBanner" name="curBanner" value="">
+                        <input type="hidden" id="hidBannerId" name="hidBannerId" value="">
+                        <input id="fileBanner" name="fileBanner" type="file" class="visually-hidden" onchange="SelectFile('Banner', 1)" />
+                        <button class="btn-none h3 ms-auto" style="margin-top: -20px;" type="button" onclick="return ShowFileDialog('Banner')">
+                            <i class="bi bi-paperclip"></i>
+                        </button>
+
+                        <div class="row mb-4 mt-4">
+                            <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input name="manager" id="manager" class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">役員</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4 mt-4">
+                            <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input name="manage_position" id="manage_position" class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">管理職</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4 mt-4">
+                            <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input name="flg1" id="flg1" class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">労務担当</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4 mt-4">
+                            <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input name="manage_business" id="manage_business" class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">業務</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4 mt-4">
+                            <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input name="accountant" id="accountant" class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">経理担当</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4 mt-4">
+                            <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input name="company_car" id="company_car" class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">社用車通勤</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4 mt-4">
+                            <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input name="flg3" id="flg3" class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">自家用車通勤</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4 mt-4">
+                            <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input name="flg4" id="flg4" class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">外国人雇用</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4 mt-4">
+                            <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input name="flg5" id="flg5" class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">家族（扶養）手当</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4 mt-4">
+                            <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input name="flg6" id="flg6" class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">住宅手当</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4 mt-4">
+                            <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input name="flg7" id="flg7" class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">保育料助成</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4 mt-4">
+                            <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input name="flg8" id="flg8" class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">障害者（本人）</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4 mt-4">
+                            <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input name="flg9" id="flg9" class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">障害者（扶養家族）</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4 mt-4">
+                            <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                                <div class="form-check">
+                                    <input name="accountant" id="accountant" class="form-check-input" type="checkbox">
+                                    <label class="form-check-label">経理担当</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="col-xl-8 mb-4">
+        <fieldset class="legend-box">
+            <legend class="legend-title">サイン書類</legend>
+            <div class="legend-body">
+
+                <div class="row mb-4 mt-4">
+                    <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">自家用車通勤</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" checked>
+                            <label class="form-check-label">外国人雇用</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-xxl-3 pe-0 d-flex align-items-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox">
+                            <label class="form-check-label">家族（扶養）手当申請書</label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="row mb-2">
+        <div class="mt-2">
+            <div class="p-1 fs-25"><label>内定通知書</label></div>
+        </div>
+        <div class="col mb-2 mt-2">
+            <button type="button" class="btn btn-blue ms-4" tabindex="-1" onclick="">詳細</button>
+            <label class="ms-2">更新日時 2023-11-17 16:44 </label>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="mt-2">
+            <div class="p-1 fs-25"><label>雇用契約書</label></div>
+        </div>
+        <div class="co mb-2 mt-2">
+            <button type="button" class="btn btn-blue ms-4" tabindex="-1" onclick="">詳細</button>
+            <label class="ms-2">更新日時 2023-11-17 16:44 </label>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-xl-2 col-md-4 mb-2">
+            <div class="bg-title text-center p-1"><span class="note">*</span><label>メールアドレス</label></div>
+            <input type="email" name="email" id="email" autocomplete="off" autofocus class="form-control border-radius-none" maxlength="25" 
+            value="huyen@gmail.com">
+        </div>
+        <div class="col-xl-2 col-md-4 mb-2">
+            <div class="bg-title text-center p-1"><span class="note">*</span><label>メールアドレス　※再確認</label></div>
+            <input type="email" name="confirm_email" id="confirm_email" autocomplete="off" class="form-control border-radius-none" maxlength="25" 
+                value="huyen@gmail.com">
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="mt-2">
+            <div class="p-1 fs-25"><label>記所属所属</label></div>
+        </div>
+        <div class="col-xl-3 col-md-4 mb-2">
+            <div class="bg-title text-center p-1"><span class="note">*</span><label>（外国人雇用）雇用条件書</label></div>
+            <fieldset class="legend-box" style="padding-right:0; padding: bottom 0;">
+                <div class="legend-body">
+                    <div class="d-flex">
+                        <a target="_blank" id="linkBanner" href="">
+                            <img id="imgBanner" name="imgBanner" class="img-fluid" style="height: 97%!important;" src="">
+                        </a>
+                        <input type="hidden" id="curBanner" name="curBanner" value="">
+                        <input type="hidden" id="hidBannerId" name="hidBannerId" value="">
+                        <input id="fileBanner" name="fileBanner" type="file" class="visually-hidden" />
+                        <button class="btn-none h7 mt-auto ms-auto" type="button" onclick="">
+                            <i class="bi bi-paperclip"></i>
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <div class="col-xl-3 col-md-4 mb-2">
+            <div class="bg-title text-center p-1"><span class="note">*</span><label>（外国人雇用）徴収費用の説明書</label></div>
+            <fieldset class="legend-box" style="padding-right:0; padding: bottom 0;">
+                <div class="legend-body">
+                    <div class="d-flex">
+                        <a target="_blank" id="linkBanner" href="">
+                            <img id="imgBanner" name="imgBanner" class="img-fluid" style="height: 97%!important;" src="">
+                        </a>
+                        <input type="hidden" id="curBanner" name="curBanner" value="">
+                        <input type="hidden" id="hidBannerId" name="hidBannerId" value="">
+                        <input id="fileBanner" name="fileBanner" type="file" class="visually-hidden" />
+                        <button class="btn-none h7 mt-auto ms-auto" type="button" onclick="">
+                            <i class="bi bi-paperclip"></i>
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-3 col-md-4 mb-2">
+            <div class="bg-title text-center p-1"><span class="note">*</span><label>（外国人雇用）雇用契約書</label></div>
+            <fieldset class="legend-box" style="padding-right:0; padding: bottom 0;">
+                <div class="legend-body">
+                    <div class="d-flex">
+                        <a target="_blank" id="linkBanner" href="">
+                            <img id="imgBanner" name="imgBanner" class="img-fluid" style="height: 97%!important;" src="">
+                        </a>
+                        <input type="hidden" id="curBanner" name="curBanner" value="">
+                        <input type="hidden" id="hidBannerId" name="hidBannerId" value="">
+                        <input id="fileBanner" name="fileBanner" type="file" class="visually-hidden" />
+                        <button class="btn-none h7 mt-auto ms-auto" type="button" onclick="">
+                            <i class="bi bi-paperclip"></i>
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+@endsection
