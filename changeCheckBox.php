@@ -1,39 +1,38 @@
 <?php
 $disabled = '';
 if (empty($item->procedure_items)) {
-    $disabled = 'select-disable ctr-readonly';
+     $disabled = 'readonly';
 }
 ?>
 <div class="row mb-4">
-  <div class="col-xl-8 mb-xl-0 mb-md-2">
-      <fieldset class="legend-box">
-          <legend class="legend-title">入社前手続き</legend>
-          <div class="legend-body">
-              <div class="row ms-1" id="ListProItem">
-                  @foreach ($prods as $prod)
-                  @if ($item && $item->office_cd == $prod->office_cd && $prod->selected == '1')
-                  <div class="form-check col-4 col-md-3 col-xl-2 mb-2">
-                      <input class="form-check-input" type="checkbox" onchange="OnCheckPro(this)"
-                          @foreach ($arrPro as $idPro)
-                              {{$idPro == $prod->id  ? 'checked' : '' }}
-                          @endforeach
-                          value="1" id="prod_{{ $loop->iteration }}" name="prod_{{$prod->id}}">
-                      <label class="form-check-label" for="prod_{{$prod->id}}">{{ $prod->name }}</label>
-                      <input type="hidden" value="{{$prod->id}}" id="hidprod_{{$loop->iteration}}" name="prod[]">
-                  </div>
-                  @endif
-                  @endforeach
-              </div>
-          </div>
-      </fieldset>
-  </div>
-
-
- <div class="col-xl-2 col-md-4 mb-0 mt-auto">
-    <div class="bg-title text-center p-1"><label>会社携帯番号</label></div>
-    <input type="text" id="txtCompany_mobile_number" name="txtCompany_mobile_number" autocomplete="off" 
-    class="form-control border-radius-none allow_numeric {{$disabled}}" 
-    maxlength="20" value="{{ $item->company_mobile_number  ?? ''}}">
+    <div class="col-xl-8 mb-xl-0 mb-md-2">
+        <fieldset class="legend-box">
+            <legend class="legend-title">入社前手続き</legend>
+            <div class="legend-body">
+                <div class="row ms-1" id="ListProItem">
+                    @foreach ($prods as $prod)
+                    @if ($item && $item->office_cd == $prod->office_cd && $prod->selected == '1')
+                    <div class="form-check col-4 col-md-3 col-xl-2 mb-2">
+                        <input class="form-check-input" type="checkbox" onchange="OnCheckPro(this)"
+                            @foreach ($arrPro as $idPro)
+                                {{$idPro == $prod->id  ? 'checked value=1' : 'value' }}
+                            @endforeach
+                             id="prod_{{ $loop->iteration }}" name="prod_{{$prod->id}}">
+                        <label class="form-check-label" for="prod_{{$prod->id}}">{{ $prod->name }}</label>
+                        <input type="hidden" value="{{$prod->id}}" id="hidprod_{{$loop->iteration}}" name="prod[]">
+                    </div>
+                    @endif
+                    @endforeach
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="col-xl-2 col-md-4 mb-0 mt-auto">
+        <div class="bg-title text-center p-1"><label>会社携帯番号</label></div>
+        <input type="text" id="txtCompany_mobile_number" name="txtCompany_mobile_number" autocomplete="off" 
+        class="form-control border-radius-none allow_numeric" {{$disabled}}
+        maxlength="20" value="{{ $item->company_mobile_number  ?? ''}}">
+    </div>
 </div>
 
 
@@ -75,6 +74,7 @@ function AddProItem(arr,id,condition) {
         }
     });
 }
+
 function OnCheckPro(params){
     if($(params).is(':checked')){
         $(params).val('1');
@@ -84,7 +84,6 @@ function OnCheckPro(params){
     {
         $(params).val("");
         CheckListProd();
-
     }
    CheckListProd();
 }
@@ -93,7 +92,8 @@ function CheckListProd()
 {
     let idProd = document.getElementsByName('prod[]');
     for (let i = 0; i <idProd.length; i++) {
-        if($(`#prod_${idProd[i].value}`).val() && $(`#prod_${idProd[i].value}`).val() != '0' && $(`#prod_${idProd[i].value}`).val() != ''){ 
+        let id = $('[name="prod_'+idProd[i].value+'"]').attr('id');
+        if($(`#${id}`).val() && $(`#${id}`).val() != '0' && $(`#${id}`).val() != ''){ 
             $('#txtCompany_mobile_number').prop('readonly', false); 
             break;
         }
