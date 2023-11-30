@@ -434,3 +434,23 @@ class U03Service
         }
     }
 }
+--------------------------------------------------------------------------------30------------------------------------------------------------------------------------------
+    function saveInformation(Request $request) {
+        $data = $request->all();
+        $idUser = $this->u03Service->saveInformation($data);
+        $r = 'u03.showInfo';
+        switch($data['mode']){
+            case 'save':
+                $r = 'u03.showInvi';
+                break;
+            case 'cancel':
+                $r = 'm01.contract';
+                break;
+        }
+        if(!empty($data['mode']))
+        {
+            return route($r, $idUser);
+        }
+        return route($r);
+    }
+--------------------------------------------------------------------------------30-----------------------------------------------------------------------------------------
