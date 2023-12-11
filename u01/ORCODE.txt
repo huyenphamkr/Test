@@ -1,0 +1,23 @@
+https://kerneldev.com/qr-codes-in-laravel-complete-guide/
+
+
+/cml
+composer require simplesoftwareio/simple-qrcode
+-ver: 
+"require": {
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "^7.2",
+        "laravel/framework": "^10.10",
+        "laravel/sanctum": "^3.3",
+        "laravel/tinker": "^2.8",
+        "laravel/ui": "^4.2",
+        "maatwebsite/excel": "^3.1",
+        "phpoffice/phpspreadsheet": "^1.9",
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "twbs/bootstrap": "5.0.2"
+    },
+-add config
+SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
+'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+
+composer dumpautoload
