@@ -155,3 +155,54 @@ $bg_text_center = "table-secondary border-dark";
 
 {{-- link --}}
 https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
+
+
+
+//check upload ảnh lien tục
+
+<script>
+  function preview(ele) {
+      let input = document.getElementById(ele + '_input');
+      let img = document.getElementById(ele);
+
+      if (input.files && input.files[0]) {
+          img.src = URL.createObjectURL(input.files[0]);
+      }
+  }
+
+  function check() {
+      let lastUploaded = 0;
+      let emptyPosition = 0; // Vị trí ảnh trống cần phải upload
+      let allEmpty = true; // Biến kiểm tra xem tất cả input có trống không hay không
+      for (let i = 1; i < 6; i++) {
+          let img = document.getElementById('frame' + i + '_input');
+          if (img.files && img.files[0]) {
+              allEmpty = false;
+              // Kiểm tra xem số ảnh đã được chọn có liên tục từ 1 trở đi hay không
+              if (parseInt(img.id.match(/\d+/)[0]) !== lastUploaded + 1) {
+                  console.log(parseInt(img.id.match(/\d+/)[0]));
+                  alert('Số ảnh không liên tục từ 1 trở đi. Vui lòng upload ảnh tại vị trí: ' + emptyPosition);
+                  return;
+              }
+              lastUploaded = parseInt(img.id.match(/\d+/)[0]);
+          } else if (emptyPosition === 0) {
+              emptyPosition = i;
+          }
+      }
+
+      if (allEmpty) {
+          alert('Vui lòng chọn ít nhất một ảnh.');
+      } else {
+          alert('Số ảnh liên tục từ 1 trở đi.');
+      }
+  }
+</script>
+
+<form>
+  @for ($i = 1; $i < 6; $i++)
+      <input type="file" id="frame{{$i}}_input" onchange="preview('frame{{$i}}')">
+      <img id="frame{{$i}}" src="" width="100px" height="100px"/><br>
+  @endfor
+  <button type="button" onclick="check()">Kiểm tra</button>
+
+</form>
