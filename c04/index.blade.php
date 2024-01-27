@@ -160,13 +160,16 @@ https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-upload
 
 //check upload ảnh lien tục
 
+
 <script>
   function preview(ele) {
       let input = document.getElementById(ele + '_input');
+      let tmp = document.getElementById('tmp_'+ele);
       let img = document.getElementById(ele);
 
       if (input.files && input.files[0]) {
           img.src = URL.createObjectURL(input.files[0]);
+          tmp.value = input.files[0].name;
       }
   }
 
@@ -180,7 +183,6 @@ https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-upload
               allEmpty = false;
               // Kiểm tra xem số ảnh đã được chọn có liên tục từ 1 trở đi hay không
               if (parseInt(img.id.match(/\d+/)[0]) !== lastUploaded + 1) {
-                  console.log(parseInt(img.id.match(/\d+/)[0]));
                   alert('Số ảnh không liên tục từ 1 trở đi. Vui lòng upload ảnh tại vị trí: ' + emptyPosition);
                   return;
               }
@@ -189,20 +191,47 @@ https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-upload
               emptyPosition = i;
           }
       }
-
-      if (allEmpty) {
-          alert('Vui lòng chọn ít nhất một ảnh.');
-      } else {
-          alert('Số ảnh liên tục từ 1 trở đi.');
+      // if (allEmpty) {
+      //     alert('Vui lòng chọn ít nhất một ảnh.');
+      // } else {
+      //     alert('Số ảnh liên tục từ 1 trở đi.');
+      // }
+  }
+  function dup(){
+      for (let line = 1; line < 5; line++) {
+          let tmp = document.getElementById('tmp_frame'+line);
+          if(tmp.value)
+          {
+              for (let i = line+1; i < 6; i++) {
+                  let tmpCheck = document.getElementById('tmp_frame'+i);
+                  if(tmp.value == tmpCheck.value) {
+                      alert('trung file vi tri '+line+' va '+i);
+                      return false;
+                  }
+              }
+          }
       }
+      return true;
   }
 </script>
 
 <form>
   @for ($i = 1; $i < 6; $i++)
       <input type="file" id="frame{{$i}}_input" onchange="preview('frame{{$i}}')">
+      <input type="hidden" id="tmp_frame{{$i}}" value="">
       <img id="frame{{$i}}" src="" width="100px" height="100px"/><br>
   @endfor
-  <button type="button" onclick="check()">Kiểm tra</button>
+  <button type="button" onclick="dup()">Kiểm tra</button>
 
 </form>
+
+{{-- mail --}}
+<pre>
+  adsjjsbvbdfhbfa-flip-verticalsjcksdnvjcdfjv
+  adkkdk
+  sjjc:vj jasnjfa-spin
+
+  s: <pre style="border: 0!important; margin-left: 30px;margin-top: -28px">aaa
+sss</pre>
+
+</pre>
