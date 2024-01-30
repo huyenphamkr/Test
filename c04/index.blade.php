@@ -235,3 +235,60 @@ https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-upload
 sss</pre>
 
 </pre>
+
+
+
+{{-- 30/01/24--------------------------------------------------------------------------------------------------------- --}}
+
+{{-- check lien tuc theo hidden exFile  --}}
+function check() {
+  let lastUploaded = 0;
+  let emptyPosition = 0; // Vị trí ảnh trống cần phải upload
+  let allEmpty = true; // Biến kiểm tra xem tất cả input có trống không hay không
+  for (let i = 1; i < 6; i++) {
+      let exFile = document.getElementById('ex_frame' + i);
+      if (exFile.value == 1) {
+          // Kiểm tra xem số ảnh đã được chọn có liên tục từ 1 trở đi hay không
+          if (parseInt(exFile.id.match(/\d+/)[0]) !== lastUploaded + 1) {
+              alert('Số ảnh không liên tục từ 1 trở đi. Vui lòng upload ảnh tại vị trí: ' + emptyPosition);
+              return;
+          }
+          lastUploaded = parseInt(exFile.id.match(/\d+/)[0]);
+      } else if (emptyPosition === 0) {
+          emptyPosition = i;
+      }
+  }
+}
+
+
+
+{{-- zip file php --}}
+https://nhanweb.com/nen-va-tao-file-zip-bang-php.html
+https://kungfuphp.com/lap-trinh/tong-hop-php/tao-file-zip-trong-php.html
+https://tinhoc88.com/tao-zip-va-nen-file-bang-php.html
+https://laptrinhvienphp.com/bai-23-huong-dan-download-file-bang-php/
+<script>
+function HandlDisplayShowFile(name){
+  const eleFile = $("#file" + name)[0] ? $("#file" + name)[0] : null;
+  let checkLast = '';
+  if (eleFile.files && eleFile.files[0]) {
+      let line = parseInt(eleFile.id.match(/\d+/)[0]);
+      if(line != totalFileUpload)
+      {
+          for (let index = line + 1; index <= totalFileUpload; index++) {
+              const eleFileLater = $("#tmpFile" + index) ? $("#tmpFile" + index) : null;
+           //   const eleOldLater = $("#oldFile" + index) ? $("#oldFile" + index) : null;
+             // if (eleFileLater.val() != '' || eleOldLater.val() != ''){
+                  checkLast = index;
+                  DisplayShowFile(index);
+              }
+          }
+          if(checkLast != 10 && checkLast){
+              for (let index = checkLast -1 ; index >= 1; index--) {DisplayShowFile(index);}                
+              DisplayShowFile(checkLast+1);
+          }
+          DisplayShowFile(line + 1);
+      }        
+  }
+}
+</cript>
