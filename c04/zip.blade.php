@@ -104,9 +104,15 @@ if(isset($_POST['zip']))
 		{
 			foreach($_POST['zip_list'] as $selected)
 			{
-			$zip->addFile($selected);
+				$zip->addFile($selected);
 			}
 			echo"<h3>Selected files are successfully zipped</h3>";
+
+			//folder
+			// foreach($_POST['zip_list'] as $key => $selected)
+			// {
+			// 	$zip->addFile($selected, $key.'/'.$selected);
+			// }
 		}
 		else
 		{
@@ -124,3 +130,30 @@ if(isset($_POST['zip']))
 	}
 }
 ?>
+
+https://vinasupport.com/zip-va-unzip-file-va-folder-trong-php/
+php artisan cache:clear 
+
+
+php artisan optimize:clear
+
+Route::get('/clear', function() {
+	//Clear route cache
+	\Artisan::call('route:cache');
+
+	//Clear config cache
+	\Artisan::call('config:cache');
+
+	// Clear application cache
+	\Artisan::call('cache:clear');
+
+	// Clear view cache
+	\Artisan::call('view:clear');
+
+	// Clear cache using reoptimized class
+	\Artisan::call('optimize:clear');
+	
+	return 'cache cleared';
+});
+
+CACHE_DRIVER=null
