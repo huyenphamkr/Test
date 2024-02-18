@@ -84,28 +84,28 @@
                     <tr class="tr-head text-center">
                         {{-- <th scope="col" class="mw-c-100"><label id="lblSPaymentDate">日付</label></th> --}}
                         {{-- <th scope="col" class="mw-c-100"><label id="lblSAuctionResult">成約結果</label></th> --}}
-                        <th scope="col" class="mw-c-150 sticky-xxl-left left-position bg-cyan-light"><label id="lblSCarNumber">号車</label></th>
+                        <th scope="col" class="mw-c-150 sticky-xxl-left left-position bg-cyan-light"><label id="lblSCarNumber">出品番号</label></th>
                         <th scope="col" class="mw-c-150 sticky-xxl-left left-position bg-cyan-light"><label id="lblSCarName">車名</label></th>
                         <th scope="col" class="mw-c-100 sticky-xxl-left left-position bg-cyan-light"><label id="lblSCarModel">型式</label></th>
                         <th scope="col" class="mw-c-250 sticky-xxl-left left-position bg-cyan-light"><label id="lblSGrade">グレード</label></th>
                         <th scope="col" class="mw-c-100"><label id="lblSChassisNumber">車体番号</label></th>
                         <th scope="col" class="mw-c-150"><label id="lblSUser">担当</label></th>
                         <th scope="col" class="mw-c-150"><label id="lblCarAmount">請求車両金額</label></th>
-                        <th scope="col" class="mw-c-150"><label id="lblBillingSubtotal">自動車代金小計</label></th>
+                        {{-- <th scope="col" class="mw-c-150"><label id="lblBillingSubtotal">自動車代金小計</label></th> --}}
                         <th scope="col" class="mw-c-100"><label id="lblSCarNo">車両No</label></th>
 
                         {{-- <th scope="col" class="mw-c-150"><label id="lblSVenue">会場</label></th> --}}
                         {{-- <th scope="col" class="mw-c-100"><label id="lblSHeldNumber">開催数</label></th> --}}
                         {{-- <th scope="col" class="mw-c-100"><label id="lblSExhibitNumber">出品番号</label></th> --}}
-                        <th scope="col" class="mw-c-150"><label id="lblSCarAmount">車両金額</label></th>
+                        <th scope="col" class="mw-c-150"><label id="lblSCarAmount">支払車両金額</label></th>
                         <th scope="col" class="mw-c-150"><label id="lblSConTax">消費税</label></th>
                         <th scope="col" class="mw-c-150"><label id="lblSRDeposit">R預託金</label></th>
-                        <th scope="col" class="mw-c-150"><label id="lblSOthers">その他</label></th>
+                        {{-- <th scope="col" class="mw-c-150"><label id="lblSOthers">その他</label></th> --}}
                         {{-- <th scope="col" class="mw-c-150"><label id="lblSCarTax">自動車税</label></th> --}}
                         <th scope="col" class="mw-c-150"><label id="lblSExhibitFee">出品料</label></th>
                         <th scope="col" class="mw-c-150"><label id="lblSClosingFee">成約料</label></th>
                         <th scope="col" class="mw-c-150"><label id="lblSReAuctionFee">再セリ料</label></th>
-                        <th scope="col" class="mw-c-200"><label>自動車代金小計</label></th>
+                        {{-- <th scope="col" class="mw-c-200"><label>自動車代金小計</label></th> --}}
                         <th scope="col" class="mw-c-200"><label>利益 </label></th>
                         {{-- <th scope="col" class="w-c-50 bg-white border-0 border-bottom border-top border-white p-0"></th> --}}
                     </tr>

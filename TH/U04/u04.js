@@ -234,7 +234,7 @@ function AddRow(mode = 2, data = null) {
             `<input readonly tabindex="-1" id="txtCarAmount${idLine}" name="txtCarAmount${modeNm}[]" type="text" autocomplete="off" maxlength="13" value="${cCarAmount}"` +
                 `class="txt-change form-control border-radius-none border-0 allow_money_minus text-end txt-amount shadow-none">` +
         `</td>` +
-        `<td scope="row" class="p-0">` +
+        `<td scope="row" class="p-0 d-none">` +
             `<input readonly tabindex="-1" id="lblBillingSubtotal${idLine}" name="lblBillingSubtotal${modeNm}[]" type="text" autocomplete="off" value="${cBillingSubtotal}"` +
                 `class="txt-change form-control border-radius-none border-0 allow_money_minus text-end shadow-none lblBillingSubtotal-${id}">` +
         `</td>` +
@@ -254,7 +254,7 @@ function AddRow(mode = 2, data = null) {
             `<input id="txtSRDeposit${idLine}" name="txtSRDeposit${modeNm}[]" type="text" autocomplete="off" maxlength="13" value="${rDeposit}"` +
                 `class="txt-change form-control border-radius-none border-0 allow_money text-end txt-billing-${line}">` +
         `</td>` +
-        `<td scope="row" class="p-0">` +
+        `<td scope="row" class="p-0 d-none">` +
             `<input id="txtSOthers${idLine}" name="txtSOthers${modeNm}[]" type="text" autocomplete="off" maxlength="13" value="${others}"  tabindex="-1"` +
                 `class="txt-change form-control border-radius-none border-0 allow_money text-end txt-billing-${line}">` +
         `</td>` +
@@ -274,7 +274,7 @@ function AddRow(mode = 2, data = null) {
             `<input id="txtSReAuctionFee${idLine}" name="txtSReAuctionFee${modeNm}[]" type="text" autocomplete="off" maxlength="13" value="${reAuctionFee}" tabindex="-1"` +
                 `class="txt-change form-control border-radius-none border-0 allow_money text-end txt-billing-fee-${line}">` +
         `</td>` +
-        `<td scope="row" class="p-0">` +
+        `<td scope="row" class="p-0 d-none">` +
             `<input id="lblSPaymentSubtotal${idLine}" name="lblSPaymentSubtotal${modeNm}[]" readonly type="text" autocomplete="off" value="${subtotal}" tabindex="-1"` +
                 `class="txt-change form-control border-radius-none border-0 allow_money text-end shadow-none txt-billing-total-${line} payment-total-${id}">` +
             `<input id="hidPaymentLine${idLine}" name="hidPaymentLine${modeNm}[]" type="hidden" autocomplete="off" value="${line}" class="txt-change">` +
@@ -417,7 +417,8 @@ function CalCarPayment(id) {
 
 // Check input search
 function ChkInputSearch () {
-    if (ChkEmpty("txtDate")) {
+    if (!ChkEmpty("txtDate")) return false;
+    if (ChkValidateDay("txtDate")) {
         ChkChangeValue(function() {
             $("#hidMode").val("search");
             SubmitForm();
