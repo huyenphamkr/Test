@@ -1,0 +1,69 @@
+select distinct
+ `ih`.`date_join` as `date_join_his`
+    , `ih`.`position` as `position_his`
+    , `ih`.`work_time_flag` as `work_time_flag_his`
+    , `ih`.`procedure_type` as `procedure_type_his`
+    , `ih`.`work_status` as `work_status_his`
+    , `ih`.`updated_date` as `updated_date_his` 
+    ,`u`.`email`
+    , `u`.`retire_date`
+    , `i`.`id`
+    , `ih`.`id` as `idh`
+    , `i`.`date_join`
+    , `i`.`office_cd`
+    , `i`.`belong_cd`
+    , `o`.`office_name`
+    , `be`.`belong_name`
+    , `i`.`position`
+    , `i`.`work_time_flag`
+    , `i`.`procedure_type`
+    , `i`.`work_status`
+    , `oh`.`office_name` as `office_name_his`
+    , `beh`.`belong_name` as `belong_name_his`
+    
+from
+    `users` as `u` 
+    left join `info_users` as `i` 
+        on `i`.`id` = `u`.`info_users_cd` 
+    left join `info_users_his` as `ih` 
+        on `ih`.`info_users_cd` = `u`.`info_users_cd` 
+    left join `mst_belong` as `be` 
+        on `i`.`belong_cd` = `be`.`belong_cd` 
+        and `i`.`office_cd` = `be`.`office_cd` 
+    left join `mst_offices` as `o` 
+        on `i`.`office_cd` = `o`.`office_cd` 
+    left join `mst_belong` as `beh` 
+        on `ih`.`belong_cd` = `beh`.`belong_cd` 
+        and `ih`.`office_cd` = `beh`.`office_cd` 
+    left join `mst_offices` as `oh` 
+        on `ih`.`office_cd` = `oh`.`office_cd` 
+where
+    `u`.`email` = 'itadakide@gmail.com' 
+    and i.date_join <= NOW() 
+    and ( 
+        `ih`.`procedure_type` != 'U04' 
+        or `ih`.`procedure_type` is null
+    ) 
+order by
+    `i`.`date_join` asc
+    , `ih`.`updated_date` asc
+    , `ih`.`id` asc
+-------------------------------------------------------------------------------------------------------
+select distinct
+    `h1`.`id` , `h1`.`work_status`, `h2`.`work_status`
+from
+    `info_users_his` as `h1` 
+    inner join `info_users_his` as `h2` 
+        on `h1`.`position` = `h2`.`position` 
+        and `h1`.`work_time_flag` = `h2`.`work_time_flag` 
+        and `h1`.`work_status` = `h2`.`work_status` 
+        and `h1`.`office_cd` = `h2`.`office_cd` 
+        and `h1`.`belong_cd` = `h2`.`belong_cd` 
+        and `h1`.`procedure_type` = `h2`.`procedure_type` 
+        and `h1`.`email` = `h2`.`email` 
+        and  `h1`.`id` != `h2`.`id` 
+where
+    `h1`.`email` = 'tt1@me.com'
+    and `h1`.`procedure_type` = 'U05' 
+order by
+    `h1`.`id` asc
