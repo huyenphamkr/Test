@@ -142,3 +142,83 @@ public function findStaffAll($data, $offiCdCur = null, $mode = null){
         //mode export or none
         return (!$mode) ? $query->paginate(CommonConst::MAX_ROW) : $query->get();
     }
+
+
+
+
+
+
+    ------------------------SS--------------------------------------public function index(Request $request)
+    {
+
+        $gate_Ser = new Gate;
+        $offiCdCur = $this->u03service->getOffiCdInfoByIdUser(Auth::id());
+        $checkHd = ($gate_Ser::check('isHDLabour') || $gate_Ser::check('isHD')) ? true : false;
+        $belongs = $this->commonService->findBelongByKey();
+        $mstWorkStatus = $this->mstClassService->findClassByType(CommonConst::WORK_STATUS);
+        $msgErr = $data = null;
+        $sessionNm = "ss_iandf_m03";
+
+        if (Session::has($sessionNm) && $checkHd) {
+            $data = Session::get($sessionNm);
+            $offiCdCur =  $data['cmbOffice'];
+        }
+
+        // if(empty($data['cmbOffice'])) $data['cmbOffice'] = $offiCdCur;
+        // $data += $request->all();
+        // $a = request()->cmbOffice ?? null;
+        // if(empty($data['cmbOffice'])) $data['cmbOffice'] = $offiCdCur;
+        // if($data && $checkHd && $data['cmbOffice'] != $offiCdCur){
+        //     $a = request()->cmbOffice;
+        //     $offiCdCur = $data['cmbOffice'] ?? null;
+        // }
+        // $request->query->set('cmbOffice', $offiCdCur);
+        if($request->isMethod('post')){
+            $data = $request->all();
+            Session::put($sessionNm, $data);
+            $offiCdCur = $data['cmbOffice'];
+            $mode = isset($data["btnSrc"]) ? $data["btnSrc"] : "";
+            switch($mode)
+            {
+                //basic
+                case CommonConst::MODE_EXPORT_BASIC:
+                    $users = $this->m03service->findStaffAll($data,$offiCdCur,1);
+                    $ids = [];
+                    foreach($users as $user) {
+                        $ids[] = $user->idInfo;
+                    }
+                    $file_name = $this->m03service->setFileNameOfficeExport($mode, $offiCdCur);
+                    return Excel::download(new ExportStaffBasic($ids), $file_name);
+                    break;
+                //salary
+                case  CommonConst::MODE_EXPORT_SALARY:
+                    $users = $this->m03service->findStaffAll($data,$offiCdCur,1);
+                    $file_name = $this->m03service->setFileNameOfficeExport($mode, $offiCdCur);
+                    return Excel::download(new ExportStaffSalary($users), $file_name);
+                    break;
+                //search
+                default:
+                    $request->query->set('page', null);
+                    $request->query->set('cmbOffice', $data['cmbOffice']);
+                    $request->query->set('cmbBelong', $data['cmbBelong']);
+                    $request->query->set('txtDate', $data['txtDate']);
+                    $request->query->set('txtIdStaff', $data['txtIdStaff']);
+                    $request->query->set('txtNameStaff', $data['txtNameStaff']);
+                    $request->query->set('cmbWStatus', $data['cmbWStatus']);
+                    break;     
+            }
+        }
+            // Session::put($data);
+        
+        if($checkHd){
+            $ofces = $this->commonService->findAllOffice();
+        }
+        else{
+            $ofces = $this->commonService->findAllOffice()->where('office_cd', $offiCdCur);
+        }
+
+        $users = $this->m03service->findStaffAll($data,$offiCdCur);
+        $ofceCur = $this->commonService->findByIdOffice($offiCdCur); 
+        if ($users->isEmpty()) $msgErr = MsgConst::MSG_NO_DATA;
+        return view('users.m03.index', compact('users','ofces','belongs','mstWorkStatus','ofceCur','checkHd','data','msgErr'));   
+    }
