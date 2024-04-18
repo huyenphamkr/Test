@@ -1,0 +1,27 @@
+IF OBJECT_ID('tempdb..#TempTable') IS NOT NULL
+	BEGIN
+		DROP TABLE #TempTable;
+	END
+	CREATE TABLE #TempTable (
+		[MAKH] [nchar](8) NOT NULL,
+		[TENKH] [nvarchar](40) NOT NULL,
+		[DIACHI] [nvarchar](40) DEFAULT NULL,
+		[TRUONGKHOA] [nchar](8) NOT NULL,
+		[SOLUONG] [int],
+	);
+INSERT INTO #TempTable VALUES ('CNTT','CONG NGHE THONG TIN','HCM','NV000001',10);
+INSERT INTO #TempTable VALUES ('CNSH','CONG NGHE SINH HOC','HN','NV000002',2);
+INSERT INTO #TempTable VALUES ('TOANTIN','TOAN TIN','HCM','NV000003',3);
+
+MERGE INTO KHOA AS target
+	USING #TempTable AS source
+	ON target.MAKH = source.MAKH
+	WHEN MATCHED THEN UPDATE SET
+			target.TENKH = source.TENKH,
+			target.DIACHI = source.DIACHI,
+			target.TRUONGKHOA = source.TRUONGKHOA,
+			target.SOLUONG = source.SOLUONG
+	WHEN NOT MATCHED BY TARGET THEN
+		INSERT (MAKH, TENKH, DIACHI, TRUONGKHOA, SOLUONG)
+		VALUES (source.MAKH, source.TENKH, source.DIACHI, source.TRUONGKHOA, source.SOLUONG);
+DROP TABLE #TempTable;
